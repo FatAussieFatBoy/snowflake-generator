@@ -4,20 +4,19 @@
   "description": "A 64-bit Snowflake generator written in pure js",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "twitter",
-    "snowflake",
-    "generator",
-    "64-bit",
-    "idgen",
-    "id"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FatAussieFatBoy/snowflake-generator.git"
   },
+  "keywords": [
+    "Snowflake",
+    "Twitter",
+    "64-bit",
+    "idgen",
+    "generator"
+  ],
   "author": "fataussiefatboy",
   "license": "MIT",
   "bugs": {
