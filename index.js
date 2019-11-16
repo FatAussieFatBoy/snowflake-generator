@@ -138,7 +138,7 @@ class SnowflakeGenerator {
      * @param {Number} [worker_id] - Worker id to generate the Snowflakes with, defaults to 1 if no worker id could be determined
      * @param {Number} [process_id] - Process id to generate the Snowflakes with, defaults to 0 if no process id could be determined
      * @param {Number} [increment] - Increment of the generated Snowflakes, defaults to the generators next available increment
-     * @returns {Promise<Snowflake>}
+     * @returns {Snowflake}
      */
 
     generate(timestamp = Date.now(), worker_id = this.WORKER_ID, process_id = this.PROCESS_ID, increment = null) {
@@ -154,17 +154,18 @@ class SnowflakeGenerator {
 
         lts = timestamp;
 
-        return Promise.resolve(new Snowflake(this, timestamp, worker_id, process_id, this.INCREMENT));
+        return new Snowflake(this, timestamp, worker_id, process_id, this.INCREMENT);
     }
 
     /**
      * Generate a certain amount of Snowflakes and return them all in an array.
      * This method creates Snowflakes using the default generate method but using default variables
      * @param {Number} amount - Number of Snowflakes to generate
-     * @returns {Promise<Array<Promise<Snowflake>>>}
+     * @returns {Promise<Array<Snowflake>>}
      */
 
     generateMany(amount) {
+        if (!amount) throw new Error("An 'amount' parameter must be provided when using this method")
         if (amount < 1) throw new RangeError("The 'amount' of generated Snowflakes must be greater than 0");
         if (amount === 1) return [this.generate()];
         let snowflakes = [];

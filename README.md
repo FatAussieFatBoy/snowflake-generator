@@ -97,7 +97,7 @@ new SnowflakeGenerator(epoch);
 >| worker_id | Number | true | .WORKER_ID | Worker id
 >| process_id | Number | true | .PROCESS_ID | Process id
 >| increment | Number | true | .INCREMENT | Snowflake increment
->**@returns**  `Promise<Snowflake>`
+>**@returns**  `Snowflake`
 
 #### .generateMany(amount)
 > Generate a defined amount of Snowflakes and returns them in an array.
