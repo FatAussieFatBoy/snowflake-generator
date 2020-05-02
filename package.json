@@ -1,0 +1,29 @@
+{
+  "name": "snowflake-generator",
+  "version": "0.0.3",
+  "description": "A 64-bit Snowflake generator written in pure js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"no test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FatAussieFatBoy/snowflake-generator.git"
+  },
+  "keywords": [
+    "Snowflake",
+    "Twitter",
+    "64-bit",
+    "idgen",
+    "generator"
+  ],
+  "author": "fataussiefatboy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FatAussieFatBoy/snowflake-generator/issues"
+  },
+  "homepage": "https://github.com/FatAussieFatBoy/snowflake-generator#readme",
+  "dependencies": {
+    "lite-merge": "^1.0.6"
+  }
+}
