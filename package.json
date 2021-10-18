@@ -1,21 +1,27 @@
 {
   "name": "snowflake-generator",
-  "version": "0.0.3",
-  "description": "A 64-bit Snowflake generator written in pure js",
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "A 64-bit Snowflake generator written in JavaScript",
+  "main": "./dist/index.js",
   "scripts": {
-    "test": "echo \"no test specified\""
+    "build": "tsc",
+    "build:watch": "tsc --watch"
   },
+  "contributors": [
+    {
+      "name": "Contributers",
+      "url": "https://github.com/FatAussieFatBoy/snowflake-generator/graphs/contributors"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FatAussieFatBoy/snowflake-generator.git"
   },
   "keywords": [
-    "Snowflake",
-    "Twitter",
-    "64-bit",
     "idgen",
-    "generator"
+    "twitter",
+    "snowflake",
+    "typescript"
   ],
   "author": "fataussiefatboy",
   "license": "MIT",
@@ -23,7 +29,8 @@
     "url": "https://github.com/FatAussieFatBoy/snowflake-generator/issues"
   },
   "homepage": "https://github.com/FatAussieFatBoy/snowflake-generator#readme",
-  "dependencies": {
-    "lite-merge": "^1.0.6"
+  "devDependencies": {
+    "@types/node": "^16.7.10",
+    "typescript": "^4.0.3"
   }
 }

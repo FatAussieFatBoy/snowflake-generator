@@ -6,7 +6,7 @@
 <a href="https://www.patreon.com/fataussie"><img src="https://img.shields.io/badge/donate-patreon-F96854" alt="Patreon"/></a>
 </div>
 
-A lightweight `(15KB)` [Twitter Snowflake](https://github.com/twitter-archive/snowflake) generation package utilising ES6 Promises.
+A lightweight [Twitter Snowflake](https://github.com/twitter-archive/snowflake) generation package utilising ES6 Promises and TypeScript.
 
 ---
 
@@ -17,150 +17,99 @@ npm install snowflake-generator
 ```
 **Require** the package into your code
 ```js
-const SnowflakeGenerator = require('snowflake-generator');
+const { Generator } = require('snowflake-generator');
 ```
 Construct a **new** Snowflake Generator with the EPOCH timestamp in milliseconds
 ```js
-const Snowflake = new SnowflakeGenerator(1420070400000); // Thursday, 1 January 2015 00:00:00
+const SnowflakeGenerator = new Generator(1420070400000); 
+// Thursday, 1 January 2015 00:00:00
 ```
 **Generate** a Snowflake
 ```js
-const flake = Snowflake.generate();
-```
-Alternatively for a performance test you can run the `example.js` file which console logs the duration it took to generate `1000` Snowflakes and how many are duplicated.
-> You can change the `amount` argument to whatever number you would like, but larger numbers might take longer to complete the duplication checks..
-```js
-node example.js -amount 1000 // Generated 1000 Snowflakes in 29 ms. with 0 duplicates
+const Snowflake = SnowflakeGenerator.generate();
 ```
 ---
 
-## SnowflakeGenerator `(class)`
+## Generator `(class)`
 
 ### Constructor
-```js
-new SnowflakeGenerator(epoch);
+```ts
+new Generator(epoch?: Date|number, shard_id?: number);
 ```
-| param | type | optional | default | description |
-| :------------: | :----------: | :------: | :-----: | :---------- |
-| epoch | Date\|Number | false | | Custom EPOCH timestamp in milliseconds
-| total_bits | Number | true| 64 | Number of bits a generated Snowflakes id is made of. The combined amount of the `epoch_bits`, `worker_bits`, `process_bits` and `increment_bits` should be less than or equal to this value.
-| epoch_bits | Number | true | 42 | Number of bits a generated Snowflakes timestamp is stored in.
-| worker_bits | Number | true | 5 | Number of bits a generated Snowflakes worker id is stored in.
-| process_bits | Number | true | 5 | Number of bits a generated Snowflakes process id is stored in.
-| increment_bits | Number | true | 12 | Number of bits a generated Snowflakes increment value is stored in.
+| param          | type         | optional | default      | description |
+| :------------- | :----------- | :------- | :----------- | :---------- |
+| epoch          | Date\|number | true     | 946684800000 | The epoch timestamp to generate from.
+| shard_id       | number       | true     | 1            | Useful when running multiple generators at the same time to prevent duplicates.
 
 ### Properties
-#### .EPOCH
-> Custom EPOCH timestamp<br/>**@type**  `Number`<br/>**@readonly**
+#### .epoch
+> The generators epoch timestamp in milliseconds.<br/>**@type**  `number`
 
-#### .TOTAL_BITS
-> Total number of bits a Snowflake id is made of<br/>**@type**  `Number`<br/>**@readonly**
-
-#### .EPOCH_BITS
-> Number of bits a Snowflakes EPOCH timestamp uses<br/>**@type**  `Number`<br/>**@readonly**
-
-#### .MAX_EPOCH
-> Maximum possible EPOCH timestamp<br/>**@type**  `Number`<br/>**@readonly**
-
-#### .WORKER_BITS
-> Number of bits a Snowflakes worker id uses<br/>**@type**  `Number`<br/>**@readonly**
-
-#### .MAX_WORKER
-> Maximum possible worker id<br/>**@type**  `Number`<br/>**@readonly**
-
-#### .WORKER_ID
-> The generators worker id<br/>**@type**  `Number`<br/>**@readonly**
-
-#### .PID_BITS
-> Number of bits a Snowflakes process id uses<br/>**@type**  `Number`<br/>**@readonly**
-
-#### .MAX_PID
-> Maximum possible process id<br/>**@type**  `Number`<br/>**@readonly**
-
-#### .PROCESS_ID
-> The generators process id<br/>**@type**  `Number`<br/>**@readonly**
-
-#### .INCREMENT_BITS
-> Number of bits a Snowflakes increment uses<br/>**@type**  `Number`<br/>**@readonly**
-
-#### .MAX_INCREMENT
-> Maximum possible increment<br/>**@type**  `Number`<br/>**@readonly**
-
-#### .INCREMENT
-> The generators increment number<br/>**@type**  `Number`
-
-### Methods
-#### .generate(options)
-> Generate a single Snowflake
->| parameter | type | optional | description |
->| :--------: | :----------: | :------: | :------------: | :---------- |
->| options | [SnowflakeOptions](#snowflake-options-object) | true | Snowflake generation options
->**@returns**  `Snowflake`
-
-#### .generateMany(amount, options)
-> Generate a defined amount of Snowflakes and returns them in an array.
->>  **Note:** Using this method generates Snowflakes without control over its more specific inputs like the `generate` method allows.
->
->| parameters | type | optional | description |
->| :--------: | :----: | :----: | :---------- |
->| amount | Number | false | Number of Snowflakes to generate
->| options | [SnowflakeOptions](#snowflake-options-object) | true | Snowflake generation options
->**@returns**  `Promise<Array<Snowflake>>`
-
-#### .deconstruct(snowflake)
-> Deconstruct a Snowflake into its stored values using the generators EPOCH timestamp
->| parameters | type | description |
->| :--------: | :------------: | :---------- |
->| snowflake | String\|Number | Snowflake id to deconstruct
->**@returns**  `Object`
-
----
-
-## Snowflake `(class)`
-### Constructor
-```js
-new Snowflake(generator, timestamp)
-```
-
-### Properties
-#### .generator
->The Snowflakes generator<br/>**@type** `SnowflakeGenerator`<br/>**@readonly**
-
-#### .snowflake
->The Snowflake id<br/>**@type** `String`
-
-#### .timestamp
-> The Snowflakes stored EPOCH timestamp<br/>**@type** `Number`<br/>**@readonly**
-
-#### .worker_id
->The Snowflakes stored worker id<br/>**@type** `Number`<br/>**@readonly**
-
-#### .process_id
-> The Snowflakes stored process id<br/>**@type** `Number`<br/>**@readonly**
+#### .shard_id
+> The id of the shard running this generator.<br/>**@type**  `number`
 
 #### .increment
-> The Snowflakes stored increment value<br/>**@type** `Number`<br/>**@readonly**
-
-#### .binary
-> The Snowflakes id in binary format<br/>**@type** `String`<br/>**@readonly**
+> The current increment iteration this generator is on.<br/>**@type**  `number`
 
 ### Methods
-#### .deconstruct()
-> Deconstructs the Snowflake into its stored values<br/>
-> **@returns** `Object`
+```ts
+Generator.generate(amount?: number, timestamp?: Date|number);
+```
+> Generates snowflakes.
+> | parameter | type         | optional | default  | description |
+> | :-------- | :----------- | :------- | :------- | :---------- |
+> | amount    | number       | true     | 1        | Amount of snowflakes to generate, recommended not to go above `1024` or duplicates will arise.
+> | timestamp | Date\|number | true     | Date.now | Timestamp to generate from
+>**@returns**  `bigint\|bigint[]`
+
+```ts
+Generator.deconstruct(snowflake: SnowflakeResolvable);
+```
+> Deconstruct a snowflake to its values using the `Generator.epoch`.
+>| parameters | type           | description |
+>| :--------- | :------------- | :---------- |
+>| snowflake  | [SnowflakeResolvable](#snowflakeresolvable) | Snowflake(s) to deconstruct
+>**@returns**  [DeconstructedSnowflake](#deconstructedsnowflake)
 
 ---
 
-## Snowflake Options `(object)`
-### Properties
-#### timestamp
-> The EPOCH timestamp, defaults to current timestamp<br/>**@type** `Date|Number`
+## `Types & Interfaces`
 
-#### worker_id
-> The Worker ID, defaults to the generators worker id, or 1<br/>**@type** `Number`
+### SnowflakeResolvable
+> Resolvable value types for a valid Snowflake.
+> - string
+> - number
+> - bigint
 
-#### process_id
-> The Procces ID, defaults to the generators process id, or 0<br/>**@type** `Number`
+### DeconstructedSnowflake
+> Interface of a Snowflake after `Generator.deconstruct()`.
+> * `@property {bigint}`  snowflake - Snowflake deconstructed from
+> * `@property {bigint}` timestamp - The timestamp the snowflake was generated
+> * `@property {bigint}` shard_id - The shard_id used when generating
+> * `@property {bigint}` increment - The increment of this snowflake
+> * `@property {string}` binary - The 64Bit snowflake binary string
 
-#### increment
-> The timestamps generation increment value<br/>**@type** `Number`
+---
+
+## Extra Credit
+
+### Generating more than 1024 snowflakes
+
+```js
+let snowflakes = [];
+let ts = Date.now();
+let amount = 20000;
+for (let i = 0; i < (amount / 1024); i++) {
+    // this could be improved, but is proof of concept.
+    let new_amount = i + 1 >= (amount / 1024) ? amount % 1024 : 1024;
+    snowflakes = snowflakes.concat(generator.generate(new_amount, ts + i));
+}
+```
+> **Note:** When parsing this array through a duplication checking function it returns `0` found duplicates.
+
+```json
+// console.log(generator) after running script.
+// Note: increment == amount.
+
+Generator { epoch: 1420070400000, shard_id: 1, increment: 20000 }
+```
