@@ -52,28 +52,31 @@ new Generator(epoch?: Date|number, shard_id?: number);
 > The current increment iteration this generator is on.<br/>**@type**  `number`
 
 ### Methods
+Generates snowflakes.
 ```ts
 Generator.generate(amount?: number, timestamp?: Date|number);
 ```
-Generates snowflakes.
 | parameter | type         | optional | default  | description |
 | :-------- | :----------- | :------- | :------- | :---------- |
 | amount    | number       | true     | 1        | Amount of snowflakes to generate, recommended not to go above `1024` or duplicates will arise.
 | timestamp | Date\|number | true     | Date.now | Timestamp to generate from
-**@returns**  `bigint\|bigint[]`
 
+**@returns**  `bigint|bigint[]`
+<br/><br/>
+
+Deconstruct a snowflake to its values using the `Generator.epoch`.
 ```ts
 Generator.deconstruct(snowflake: SnowflakeResolvable);
 ```
-Deconstruct a snowflake to its values using the `Generator.epoch`.
 | parameters | type           | description |
 | :--------- | :------------- | :---------- |
 | snowflake  | [SnowflakeResolvable](#snowflakeresolvable) | Snowflake(s) to deconstruct
+
 **@returns**  [DeconstructedSnowflake](#deconstructedsnowflake)
 
 ---
 
-## `Types & Interfaces`
+## Types & Interfaces
 
 ### SnowflakeResolvable
 > Resolvable value types for a valid Snowflake.
@@ -83,11 +86,11 @@ Deconstruct a snowflake to its values using the `Generator.epoch`.
 
 ### DeconstructedSnowflake
 > Interface of a Snowflake after `Generator.deconstruct()`.
-> * `@property {bigint}`  snowflake - Snowflake deconstructed from
-> * `@property {bigint}` timestamp - The timestamp the snowflake was generated
-> * `@property {bigint}` shard_id - The shard_id used when generating
-> * `@property {bigint}` increment - The increment of this snowflake
-> * `@property {string}` binary - The 64Bit snowflake binary string
+> - snowflake - Snowflake deconstructed from<br/>**@type**  `bigint`
+> - timestamp - The timestamp the snowflake was generated<br/>**@type**  `bigint`
+> - shard_id - The shard_id used when generating<br/>**@type**  `bigint`
+> - increment - The increment of this snowflake<br/>**@type**  `bigint`
+> - binary - The 64Bit snowflake binary string<br/>**@type**  `string`
 
 ---
 
@@ -107,9 +110,9 @@ for (let i = 0; i < (amount / 1024); i++) {
 ```
 > **Note:** When parsing this array through a duplication checking function it returns `0` found duplicates.
 
-```json
-// console.log(generator) after running script.
-// Note: increment == amount.
+```console
+> console.log(generator) after running script.
+> Note: increment == amount.
 
 Generator { epoch: 1420070400000, shard_id: 1, increment: 20000 }
 ```
