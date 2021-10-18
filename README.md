@@ -55,21 +55,21 @@ new Generator(epoch?: Date|number, shard_id?: number);
 ```ts
 Generator.generate(amount?: number, timestamp?: Date|number);
 ```
-> Generates snowflakes.
-> | parameter | type         | optional | default  | description |
-> | :-------- | :----------- | :------- | :------- | :---------- |
-> | amount    | number       | true     | 1        | Amount of snowflakes to generate, recommended not to go above `1024` or duplicates will arise.
-> | timestamp | Date\|number | true     | Date.now | Timestamp to generate from
->**@returns**  `bigint\|bigint[]`
+Generates snowflakes.
+| parameter | type         | optional | default  | description |
+| :-------- | :----------- | :------- | :------- | :---------- |
+| amount    | number       | true     | 1        | Amount of snowflakes to generate, recommended not to go above `1024` or duplicates will arise.
+| timestamp | Date\|number | true     | Date.now | Timestamp to generate from
+**@returns**  `bigint\|bigint[]`
 
 ```ts
 Generator.deconstruct(snowflake: SnowflakeResolvable);
 ```
-> Deconstruct a snowflake to its values using the `Generator.epoch`.
->| parameters | type           | description |
->| :--------- | :------------- | :---------- |
->| snowflake  | [SnowflakeResolvable](#snowflakeresolvable) | Snowflake(s) to deconstruct
->**@returns**  [DeconstructedSnowflake](#deconstructedsnowflake)
+Deconstruct a snowflake to its values using the `Generator.epoch`.
+| parameters | type           | description |
+| :--------- | :------------- | :---------- |
+| snowflake  | [SnowflakeResolvable](#snowflakeresolvable) | Snowflake(s) to deconstruct
+**@returns**  [DeconstructedSnowflake](#deconstructedsnowflake)
 
 ---
 
