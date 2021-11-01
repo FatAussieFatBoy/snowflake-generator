@@ -1,5 +1,3 @@
-import cluster from "cluster";
-
 const cached64BitZeros = "0000000000000000000000000000000000000000000000000000000000000000";
 
 export class Generator {
