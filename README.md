@@ -6,7 +6,7 @@
 <a href="https://www.patreon.com/fataussie"><img src="https://img.shields.io/badge/donate-patreon-F96854" alt="Patreon"/></a>
 </div>
 
-A lightweight [Twitter Snowflake](https://github.com/twitter-archive/snowflake) generation package utilising ES6 Promises and TypeScript.
+A lightweight [Twitter Snowflake](https://github.com/twitter-archive/snowflake) generation package utilising TypeScript.
 
 ---
 
