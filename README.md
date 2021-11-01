@@ -34,21 +34,21 @@ const Snowflake = SnowflakeGenerator.generate();
 
 ### Constructor
 ```ts
-new Generator(epoch?: Date|number, shard_id?: number);
+new Generator(epoch?: Date|number, shardID?: number);
 ```
 | param          | type         | optional | default      | description |
 | :------------- | :----------- | :------- | :----------- | :---------- |
 | epoch          | Date\|number | true     | 946684800000 | The epoch timestamp to generate from.
-| shard_id       | number       | true     | 1            | Useful when running multiple generators at the same time to prevent duplicates.
+| shardID       | number       | true     | 1            | Useful when running multiple generators at the same time to prevent duplicates.
 
 ### Properties
-#### .epoch
+#### .EPOCH
 > The generators epoch timestamp in milliseconds.<br/>**@type**  `number`
 
-#### .shard_id
+#### .SHARD_ID
 > The id of the shard running this generator.<br/>**@type**  `number`
 
-#### .increment
+#### .INCREMENT
 > The current increment iteration this generator is on.<br/>**@type**  `number`
 
 ### Methods

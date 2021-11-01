@@ -1,11 +1,14 @@
 {
   "name": "snowflake-generator",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A 64-bit Snowflake generator written in JavaScript",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
+  "files": ["dist/**/*"],
   "scripts": {
     "build": "tsc",
-    "build:watch": "tsc --watch"
+    "build:watch": "tsc --watch",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json"
   },
   "contributors": [
     {
@@ -31,6 +34,9 @@
   "homepage": "https://github.com/FatAussieFatBoy/snowflake-generator#readme",
   "devDependencies": {
     "@types/node": "^16.7.10",
+    "prettier": "^2.4.1",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.0.3"
   }
 }
